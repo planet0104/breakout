@@ -1,0 +1,6 @@
+//生成安装包
+// https://marketplace.visualstudio.com/items?itemName=visualstudioclient.MicrosoftVisualStudio2017InstallerProjects
+//c++ 工具
+//https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15
+
+//python 转码 print u'\xb1\xd8\xd0\xeb\xb6\xa8\xd2\xe5\xc8\xeb\xbf\xda\xb5\xe3\r\n'.encode('latin1').decode('gbk')
