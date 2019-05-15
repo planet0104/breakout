@@ -588,6 +588,9 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             "__cargo_web_snippet_1e65287b40ff2503a5bd21bba8369d5759ddb2d4": function($0, $1) {
                 $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);($0).height=($1);
             },
+            "__cargo_web_snippet_21b3f8a03ebd43638729195a0f8d81a35d6db610": function($0) {
+                Module.STDWEB_PRIVATE.from_js($0, (function(){var ua=navigator.userAgent.toLowerCase();if(ua.match(/MicroMessenger/i)=="micromessenger"){return true;}else{return false;}})());
+            },
             "__cargo_web_snippet_22ebc1c8b700e17d3297b8b69a6d7c01d51645ca": function($0, $1, $2, $3) {
                 $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);$3 = Module.STDWEB_PRIVATE.to_js($3);($0).fillText(($1),($2),($3));
             },
@@ -638,9 +641,6 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             },
             "__cargo_web_snippet_4fd31c9e56d40b8642cf9e6f96fd6b570f355cea": function($0) {
                 $0 = Module.STDWEB_PRIVATE.to_js($0);console.error(($0));
-            },
-            "__cargo_web_snippet_50354089510688053b20cfc92f12fbb0eb249ed6": function($0) {
-                $0 = Module.STDWEB_PRIVATE.to_js($0);setInterval(($0),1);
             },
             "__cargo_web_snippet_54c301f42021c68eb1c25310e36baf3b3b910e96": function($0, $1) {
                 $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);var array=($0);var pointer=($1);Module.HEAPU8.set(array,pointer);
@@ -767,6 +767,9 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             },
             "__cargo_web_snippet_b6fbe111e441333398599f63dc09b26f8d172654": function($0, $1) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return($1).innerHeight;})());
+            },
+            "__cargo_web_snippet_c442b3d2990e5a95c4e0507aad9fb3b5390a788c": function($0) {
+                $0 = Module.STDWEB_PRIVATE.to_js($0);var updatefn=($0);var u=function(){updatefn();setTimeout(u,1);};setTimeout(u,1);
             },
             "__cargo_web_snippet_cbd9ab50e213a9a554b2ca9ed651f4cec9549baa": function($0) {
                 var r = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (r instanceof DOMException) && (r.name === "NoModificationAllowedError");
