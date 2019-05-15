@@ -162,6 +162,10 @@ impl Level {
                 }
             }
         }
+        //删除旧的砖块刚体
+        for brick in &mut self.bricks {
+            self.world.borrow_mut().remove_colliders(&[*brick.handle()]);
+        }
         self.bricks = bricks;
         self.reset();
         true
