@@ -111,10 +111,10 @@ impl Game {
     pub fn on_click(&mut self, x: f64, y: f64) {
         let img_button = &self.img_button.0;
         let (x, y, ix, iy) = (
-            x as u32,
-            y as u32,
-            WINDOW_WIDTH as u32 / 2 - img_button.width() / 2,
-            290,
+            x,
+            y,
+            WINDOW_WIDTH / 2. - img_button.width() / 2.,
+            290.0,
         );
         if x > ix && y > iy && x < ix + img_button.width() && y < iy + img_button.height() {
             self.img_button.1[3] = 200;
@@ -137,17 +137,15 @@ impl Game {
                 //按钮效果
                 let img_button = &self.img_button.0;
                 let (x, y, ix, iy) = (
-                    x as u32,
-                    y as u32,
-                    WINDOW_WIDTH as u32 / 2 - img_button.width() / 2,
-                    290,
+                    x,
+                    y,
+                    WINDOW_WIDTH / 2. - img_button.width() / 2.,
+                    290.,
                 );
                 if x > ix && y > iy && x < ix + img_button.width() && y < iy + img_button.height() {
                     if self.img_button.1[3] != 255 {
                         self.img_button.1[3] = 255;
-                        if let Some(sound) = self.sound_bounce.data() {
-                            mengine::play_sound(sound, AudioType::WAV);
-                        }
+                        mengine::play_sound(&mut self.sound_bounce, AudioType::WAV);
                     }
                 } else {
                     self.img_button.1[3] = 200;

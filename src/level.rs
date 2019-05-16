@@ -209,9 +209,7 @@ impl Level {
                 }
             } else {
                 if jump {
-                    if let Some(sound) = self.sound_countdown.data() {
-                        mengine::play_sound(sound, AudioType::WAV);
-                    }
+                    mengine::play_sound(&mut self.sound_countdown, AudioType::WAV);
                 }
             }
         }
@@ -262,18 +260,14 @@ impl Level {
                                 colliders_to_remove.push(*brick.handle());
                                 brick.kill();
                                 *self.total_score.borrow_mut() += 100;
-                                if let Some(sound) = self.sound_brick_death.data() {
-                                    mengine::play_sound(sound, AudioType::WAV);
-                                }
+                                mengine::play_sound(&mut self.sound_brick_death, AudioType::WAV);
                                 brick_death = true;
                                 break; //只要一个球撞到，不再检测另外一个球
                             }
                         }
                     }
                     if !brick_death {
-                        if let Some(sound) = self.sound_bounce.data() {
-                            mengine::play_sound(sound, AudioType::WAV);
-                        }
+                        mengine::play_sound(&mut self.sound_bounce, AudioType::WAV);
                     }
                 }
             };
