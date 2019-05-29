@@ -62,8 +62,9 @@ impl Paddle {
         SpriteAction::None
     }
 
-    pub fn draw(&mut self, g: &mut Graphics) -> Result<(), String> {
+    pub fn draw(&mut self, g: &mut Graphics) {
         self.image.draw(
+            None,
             g,
             [
                 self.region.l(),
@@ -71,6 +72,6 @@ impl Paddle {
                 self.region.w(),
                 self.region.h(),
             ],
-        )
+        );
     }
 }

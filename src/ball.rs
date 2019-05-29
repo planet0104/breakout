@@ -82,8 +82,9 @@ impl Ball {
         SpriteAction::None
     }
 
-    pub fn draw(&mut self, g: &mut Graphics) -> Result<(), String> {
+    pub fn draw(&mut self, g: &mut Graphics) {
         self.anim.draw(
+            None,
             g,
             [
                 self.region.l(),
@@ -91,6 +92,6 @@ impl Ball {
                 self.region.w(),
                 self.region.h(),
             ],
-        )
+        );
     }
 }

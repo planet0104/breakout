@@ -8,29 +8,20 @@ pub struct Level {
     balls: Vec<Ball>,
     paddle: Paddle,
     pub bricks: Vec<Brick>,
-    sound_brick_death: AssetsFile,
-    sound_bounce: AssetsFile,
-    sound_countdown: AssetsFile,
-    tiles: Rc<Image>,
+    sound_brick_death: Sound,
+    sound_bounce: Sound,
+    sound_countdown: Sound,
+    tiles: Image,
     map_levels: Vec<Vec<Vec<char>>>,
 }
 
 impl Level {
     pub fn new(
         total_score: Rc<RefCell<i32>>,
-        image_loader: &mut ImageLoader,
+        resources: &HashMap<String, Assets>,
         world: Rc<RefCell<World<f64>>>,
     ) -> Level {
-        let tiles = image_loader.load("tiles.png").unwrap();
-
-        let mut sound_countdown = AssetsFile::new("sounds/countdownBlip.wav");
-        sound_countdown.load();
-
-        let mut sound_brick_death = AssetsFile::new("sounds/brickDeath.wav");
-        sound_brick_death.load();
-
-        let mut sound_bounce = AssetsFile::new("sounds/bounce.wav");
-        sound_bounce.load();
+        let tiles = resources.get(ASSETS_TILES).unwrap().as_image().unwrap();
 
         //倒计时动画
         let mut countdown = Animation::new(
@@ -108,9 +99,21 @@ impl Level {
             paddle,
             balls: vec![],
             bricks: vec![],
-            sound_brick_death,
-            sound_bounce,
-            sound_countdown,
+            sound_brick_death: resources
+                .get(ASSETS_SOUND_BRICK_DEATH)
+                .unwrap()
+                .as_sound()
+                .unwrap(),
+            sound_bounce: resources
+                .get(ASSETS_SOUND_BOUNCE)
+                .unwrap()
+                .as_sound()
+                .unwrap(),
+            sound_countdown: resources
+                .get(ASSETS_SOUND_COUNTDOWN)
+                .unwrap()
+                .as_sound()
+                .unwrap(),
             map_levels,
         }
     }
@@ -209,7 +212,7 @@ impl Level {
                 }
             } else {
                 if jump {
-                    mengine::play_sound(&mut self.sound_countdown, AudioType::WAV);
+                    mengine::play_sound(&self.sound_countdown);
                 }
             }
         }
@@ -260,14 +263,14 @@ impl Level {
                                 colliders_to_remove.push(*brick.handle());
                                 brick.kill();
                                 *self.total_score.borrow_mut() += 100;
-                                mengine::play_sound(&mut self.sound_brick_death, AudioType::WAV);
+                                mengine::play_sound(&self.sound_brick_death);
                                 brick_death = true;
                                 break; //只要一个球撞到，不再检测另外一个球
                             }
                         }
                     }
                     if !brick_death {
-                        mengine::play_sound(&mut self.sound_bounce, AudioType::WAV);
+                        mengine::play_sound(&self.sound_bounce);
                     }
                 }
             };
@@ -295,17 +298,17 @@ impl Level {
         paddle.set_position(x);
     }
 
-    pub fn draw(&mut self, g: &mut Graphics) -> Result<(), String> {
+    pub fn draw(&mut self, g: &mut Graphics) {
         if self.countdown.is_active() {
-            self.countdown.draw(g, self.countdown.position.unwrap())?;
+            self.countdown
+                .draw(None, g, self.countdown.position.unwrap());
         }
         for i in 0..self.balls.len() {
-            self.balls[i].draw(g)?;
+            self.balls[i].draw(g);
         }
         for i in 0..self.bricks.len() {
-            self.bricks[i].draw(g)?;
+            self.bricks[i].draw(g);
         }
-        self.paddle.draw(g)?;
-        Ok(())
+        self.paddle.draw(g);
     }
 }

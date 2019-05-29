@@ -3,7 +3,7 @@ pub static WINDOW_HEIGHT: f64 = 416.0;
 pub static UPDATE_RATE: u64 = 60;
 pub use super::ball::Ball;
 pub use super::brick::Brick;
-pub use super::game::Game;
+pub use super::game::*;
 pub use super::level::Level;
 pub use super::paddle::Paddle;
 pub use mengine::*;
@@ -20,6 +20,7 @@ pub use nphysics2d::object::{
 };
 pub use nphysics2d::world::{ColliderWorld, World};
 pub use std::cell::RefCell;
+pub use std::collections::HashMap;
 pub use std::f64::consts::PI;
 pub use std::rc::Rc;
 
